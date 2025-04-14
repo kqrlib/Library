@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import CategoryGroup from './CategoryGroup'
 import Collapse from '@/components/Collapse'
-import Logo from './Logo'
 import { MenuList } from './MenuList'
 import SearchDrawer from './SearchDrawer'
 import TagGroups from './TagGroups'
@@ -125,17 +124,20 @@ const TopNav = (props) => {
             <SearchDrawer cRef={searchDrawer} slot={searchDrawerSlot} />
 
             {/* 导航栏 */}
-            <div id='sticky-nav' className={`${siteConfig('NEXT_NAV_TYPE', null, CONFIG) !== 'normal' ? 'fixed' : 'relative'} lg:relative w-full top-0 z-20 transform duration-500`}>
+            <div id='sticky-nav' className={`${siteConfig('NEXT_NAV_TYPE', null, CONFIG) !== 'normal' ? 'fixed' : 'relative'} w-full top-0 z-20 transform duration-500`}>
                 <div className='w-full flex justify-between items-center py-2 px-4 bg-white dark:bg-gray-800 text-gray-800 dark:text-white shadow-sm'>
-                    {/* 左侧LOGO 标题 */}
+                    {/* 左侧菜单按钮 */}
                     <div className='flex flex-none flex-grow-0'>
                         <div onClick={toggleMenuOpen} className='w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition-colors'>
                             {isOpen ? <i className='fas fa-times' /> : <i className='fas fa-bars' />}
                         </div>
                     </div>
 
+                    {/* 中间网站标题 */}
                     <div className='flex'>
-                        <Logo {...props} />
+                        <div className='flex items-center'>
+                            <span className='text-lg font-semibold'>网站标题</span>
+                        </div>
                     </div>
 
                     {/* 右侧功能 */}
