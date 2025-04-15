@@ -40,7 +40,7 @@ const BlogPostCard = ({ post, index, showSummary }) => {
             {siteConfig('POST_TITLE_ICON') && (
               <NotionIcon icon={post.pageIcon} />
             )}{' '}
-            <span className='menu-link'>{post.title}</span>
+            <span>{post.title}</span>
           </Link>
 
           <div
@@ -54,7 +54,7 @@ const BlogPostCard = ({ post, index, showSummary }) => {
                     passHref
                     className='hover:text-blue-500 dark:hover:text-blue-400 cursor-pointer font-light text-sm transform'>
                     <i className='mr-1 fas fa-folder' />
-                    <span className='menu-link'>{post.category}</span>
+                    <span>{post.category}</span>
                   </Link>
                   <span className='mx-2'>|</span>
                 </>
@@ -63,13 +63,13 @@ const BlogPostCard = ({ post, index, showSummary }) => {
                 href={`/archive#${formatDateFmt(post?.publishDate, 'yyyy-MM')}`}
                 passHref
                 className='hover:text-blue-500 dark:hover:text-blue-400 font-light cursor-pointer text-sm leading-4 mr-3'>
-                <span className='menu-link'>{post.date?.start_date}</span>
+                <span>{post.date?.start_date}</span>
               </Link>
             </div>
 
             <TwikooCommentCount
               post={post}
-              className='hover:text-blue-500 dark:hover:text-blue-400 hover:underline text-sm'
+              className='hover:text-blue-500 dark:hover:text-blue-400 text-sm'
             />
 
             <div className='hover:text-blue-500 dark:hover:text-blue-400  md:flex-nowrap flex-wrap md:justify-start inline-block'>
@@ -102,10 +102,10 @@ const BlogPostCard = ({ post, index, showSummary }) => {
             </div>
           )}
 
-          <div className='text-right border-t pt-8 border-dashed'>
+          <div className='text-right border-t pt-8'>
             <Link
               href={post?.href}
-              className='hover:bg-opacity-100 hover:underline transform duration-300 p-3 text-white bg-gray-800 cursor-pointer'>
+              className='hover:bg-opacity-100 transform duration-300 p-2 text-white bg-gray-800 cursor-pointer text-sm rounded-lg'>
               {locale.COMMON.ARTICLE_DETAIL}
               <i className='ml-1 fas fa-angle-right' />
             </Link>
@@ -128,6 +128,13 @@ const BlogPostCard = ({ post, index, showSummary }) => {
             </Link>
           )}
       </div>
+      
+      <style jsx global>{`
+        /* Remove underline effects globally */
+        a:hover, a:focus, a:active {
+          text-decoration: none !important;
+        }
+      `}</style>
     </Card>
   )
 }
