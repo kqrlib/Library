@@ -78,7 +78,7 @@ const SearchInput = ({ currentTag, keyword, cRef }) => {
     }
   }
 
-  return <div className='flex w-full bg-gray-100'
+  return <div className='flex w-full bg-gray-100 rounded-full shadow-sm'
               data-aos="fade-down"
               data-aos-duration="500"
               data-aos-delay="200"
@@ -89,7 +89,7 @@ const SearchInput = ({ currentTag, keyword, cRef }) => {
             ref={searchInputRef}
             type='text'
             placeholder={currentTag ? `${locale.SEARCH.TAGS} #${currentTag}` : `${locale.SEARCH.ARTICLES}`}
-            className={'outline-none w-full text-sm pl-4 transition focus:shadow-lg font-light leading-10 text-black bg-gray-100 dark:bg-gray-800 dark:text-white'}
+            className={'outline-none w-full text-sm pl-4 transition focus:shadow-sm rounded-full font-light leading-10 text-black bg-gray-100 dark:bg-gray-800 dark:text-white'}
             onKeyUp={handleKeyUp}
             onFocus={handleFocus}
             onCompositionStart={lockSearchInput}
