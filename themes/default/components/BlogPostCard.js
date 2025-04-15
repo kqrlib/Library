@@ -102,10 +102,10 @@ const BlogPostCard = ({ post, index, showSummary }) => {
             </div>
           )}
 
-          <div className='text-right border-t pt-8'>
+          <div className='text-right pt-1'>
             <Link
               href={post?.href}
-              className='hover:bg-opacity-100 transform duration-300 p-2 text-white bg-gray-800 cursor-pointer text-sm rounded-lg'>
+              className='transform duration-300 p-2 text-white bg-themeColor cursor-pointer text-sm rounded-lg'>
               {locale.COMMON.ARTICLE_DETAIL}
               <i className='ml-1 fas fa-angle-right' />
             </Link>
