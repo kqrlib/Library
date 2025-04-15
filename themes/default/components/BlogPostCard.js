@@ -102,7 +102,7 @@ const BlogPostCard = ({ post, index, showSummary }) => {
             </div>
           )}
 
-          <div className='text-right>
+          <div className='text-right'>
             <Link
               href={post?.href}
               className='transform duration-300 p-2 text-white bg-themeColor dark:bg-themeColor-dark cursor-pointer text-sm rounded-lg'>
