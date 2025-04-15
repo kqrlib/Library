@@ -82,7 +82,7 @@ const BlogPostCard = ({ post, index, showSummary }) => {
           {(!showPreview || showSummary) && !post.results && (
             <p
               {...aosProps}
-              className='mt-4 mb-12 text-gray-700 dark:text-gray-300 text-sm font-light leading-7'>
+              className='mt-4 mb-3 text-gray-700 dark:text-gray-300 text-sm font-light leading-7'>
               {post.summary}
             </p>
           )}
@@ -102,10 +102,10 @@ const BlogPostCard = ({ post, index, showSummary }) => {
             </div>
           )}
 
-          <div className='text-right pt-1'>
+          <div className='text-right>
             <Link
               href={post?.href}
-              className='transform duration-300 p-2 text-white bg-themeColor cursor-pointer text-sm rounded-lg'>
+              className='transform duration-300 p-2 text-white bg-themeColor dark:bg-themeColor-dark cursor-pointer text-sm rounded-lg'>
               {locale.COMMON.ARTICLE_DETAIL}
               <i className='ml-1 fas fa-angle-right' />
             </Link>

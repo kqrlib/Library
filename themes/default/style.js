@@ -7,34 +7,6 @@
 const Style = () => {
   return (
     <>
-      {/* Tailwind CSS 配置 - 添加自定义颜色 */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            tailwind.config = {
-              darkMode: 'class',
-              theme: {
-                extend: {
-                  colors: {
-                    themeColor: {
-                      DEFAULT: '#C76442',
-                      dark: '#C86442'
-                    },
-                    paper: {
-                      DEFAULT: '#FAF9F5',
-                      dark: '#262624'
-                    },
-                    card: {
-                      DEFAULT: '#FFFFFF',
-                      dark: '#30302E'
-                    }
-                  }
-                }
-              }
-            }
-          `
-        }}
-      />
       <style jsx global>{`
         /* 底色 */
         body {

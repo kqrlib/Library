@@ -13,13 +13,9 @@ module.exports = {
     fontFamily: fontFamilies,
     screens: {
       sm: '540px',
-      // => @media (min-width: 576px) { ... }
       md: '720px',
-      // => @media (min-width: 768px) { ... }
       lg: '960px',
-      // => @media (min-width: 992px) { ... }
       xl: '1140px',
-      // => @media (min-width: 1200px) { ... }
       '2xl': '1536px'
     },
     container: {
@@ -39,7 +35,6 @@ module.exports = {
           'black-gray': '#101414',
           'light-gray': '#e5e5e5'
         },
-        // black: '#212b36',
         'dark-700': '#090e34b3',
         dark: {
           DEFAULT: '#111928',
@@ -60,7 +55,21 @@ module.exports = {
         stroke: '#DFE4EA',
         'gray-1': '#F9FAFB',
         'gray-2': '#F3F4F6',
-        'gray-7': '#CED4DA'
+        'gray-7': '#CED4DA',
+
+        // === 新增自定义颜色 ===
+        paper: {
+          DEFAULT: '#FAF9F5',
+          dark: '#262624'
+        },
+        card: {
+          DEFAULT: '#FFFFFF',
+          dark: '#30302E'
+        },
+        themeColor: {
+          DEFAULT: '#C76442',
+          dark: '#C86442'
+        }
       },
       maxWidth: {
         side: '14rem',
