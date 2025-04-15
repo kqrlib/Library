@@ -1,6 +1,7 @@
 import { useGlobal } from '@/lib/global'
+import throttle from 'lodash.throttle'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import CategoryGroup from './CategoryGroup'
 import Collapse from '@/components/Collapse'
 import { MenuList } from './MenuList'
@@ -11,6 +12,8 @@ import { siteConfig } from '@/lib/config'
 import { useNextGlobal } from '..'
 import { useRouter } from 'next/router'
 
+let windowTop = 0
+
 /**
  * 顶部导航
  * @param {*} param0
@@ -18,10 +21,34 @@ import { useRouter } from 'next/router'
  */
 const TopNav = (props) => {
   const { tags, currentTag, categories, currentCategory } = props
-  const { locale, isDarkMode, toggleDarkMode } = useGlobal()
+  const { locale } = useGlobal()
   const searchDrawer = useRef()
   const collapseRef = useRef(null)
   const router = useRouter()
+
+  const scrollTrigger = useCallback(throttle(() => {
+    const scrollS = window.scrollY
+    if (scrollS >= windowTop && scrollS > 10) {
+      const nav = document.querySelector('#sticky-nav')
+      nav && nav.classList.replace('top-0', '-top-40')
+      windowTop = scrollS
+    } else {
+      const nav = document.querySelector('#sticky-nav')
+      nav && nav.classList.replace('-top-40', 'top-0')
+      windowTop = scrollS
+    }
+  }, 200), [])
+
+  // 监听滚动
+  useEffect(() => {
+    if (siteConfig('NEXT_NAV_TYPE', null, CONFIG) === 'autoCollapse') {
+      scrollTrigger()
+      window.addEventListener('scroll', scrollTrigger)
+    }
+    return () => {
+      siteConfig('NEXT_NAV_TYPE', null, CONFIG) === 'autoCollapse' && window.removeEventListener('scroll', scrollTrigger)
+    }
+  }, [])
 
   const [isOpen, changeShow] = useState(false)
 
@@ -97,35 +124,24 @@ const TopNav = (props) => {
             <SearchDrawer cRef={searchDrawer} slot={searchDrawerSlot} />
 
             {/* 导航栏 */}
-            <div id='sticky-nav' className='relative w-full z-20'>
-                <div className='w-full flex justify-between items-center py-2 px-4 bg-white dark:bg-gray-800 text-gray-800 dark:text-white shadow-sm'>
-                    {/* 左侧菜单按钮 */}
+            <div id='sticky-nav' className={`${siteConfig('NEXT_NAV_TYPE', null, CONFIG) !== 'normal' ? 'fixed' : 'relative'} lg:relative w-full top-0 z-20 transform duration-500`}>
+                <div className='w-full flex justify-between items-center p-4 bg-white dark:bg-black text-gray-800 dark:text-white'>
+                    {/* 左侧LOGO 标题 */}
                     <div className='flex flex-none flex-grow-0'>
-                        <div onClick={toggleMenuOpen} className='w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition-colors'>
+                        <div onClick={toggleMenuOpen} className='w-8 h-8 flex items-center justify-center cursor-pointer'>
                             {isOpen ? <i className='fas fa-times' /> : <i className='fas fa-bars' />}
                         </div>
                     </div>
 
-                    {/* 中间网站标题 */}
                     <div className='flex'>
-                        <Link href='/' className='flex items-center'>
-                            <span className='text-lg font-semibold hover:text-gray-600 dark:hover:text-gray-300 transition-colors'>网站标题</span>
+                        <Link href="/" className="font-bold text-lg hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                            零一星火
                         </Link>
                     </div>
 
                     {/* 右侧功能 */}
-                    <div className='flex justify-end items-center space-x-2'>
-                        {/* 深浅色切换按钮 */}
-                        <div className="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition-colors" onClick={toggleDarkMode}>
-                            {isDarkMode ? (
-                                <i className="fas fa-sun" />
-                            ) : (
-                                <i className="fas fa-moon" />
-                            )}
-                        </div>
-                        
-                        {/* 搜索按钮 */}
-                        <div className="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition-colors" onClick={showSearchModal}>
+                    <div className='flex justify-end items-center text-sm font-serif'>
+                        <div className="w-8 h-8 flex items-center justify-center cursor-pointer block lg:hidden" onClick={showSearchModal}>
                             <i className="fas fa-search" />
                         </div>
                     </div>
